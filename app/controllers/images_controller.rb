@@ -2,40 +2,25 @@ class ImagesController < ApplicationController
     require 'rubygems'
     require 'nokogiri'
     require 'open-uri'
+    require 'httpclient'
 
   def index
-    url = "http://feeds2.feedburner.com/slashfilm"
 
-    # doc = Nokogiri::HTML(open(url))
-    # @scrapeVar = doc.at_css("title").text
-    #@scrapeVar = doc.at_css("title").text
+    @sites = ["http://feeds2.feedburner.com/slashfilm", "http://feeds.feedburner.com/totalfilm/news", "http://www.iwatchstuff.com/index.xml", "http://feeds.movieweb.com/movieweb_movienews", "http://imgur.com/r/movies", "http://feeds.feedburner.com/Cinecast", "http://feeds.feedburner.com/thr/film", "http://rss.firstshowing.net/firstshowing"]
 
-    @a = []
-    @t = ["1","www.google.com/one.jpg","3.","teste sds", "om.jpg"]
+    @urls = Array.new
 
-  
-    @t.select!{ |s| s.match( "[jpg]" )}
+    @sites.each do |site|
 
-    xmldoc = Nokogiri::XML(open(url))  
-    xmldoc = xmldoc.to_html
-    htmldoc = Nokogiri::HTML(xmldoc)
+    response = HTTPClient.get site
+     @urls += response.body.scan( /http[^<>]*jpg/)
+     @urls.reject!{|s|s.match(/yahoo/)}
 
-    @g=htmldoc
-    htmldoc.xpath("//a").each do |paragraph|
-    #htmldoc.xpath("//a[//*[contains(text(), '')]]").each do |paragraph|
+    #@urls += response.body.scan(/yahoo/)
 
-    @a.push(paragraph.inner_html)
-    
-    @b = @a.size
-    #@a.to_s
-    @a.select!{ |s| s.match( "[jpg]" )}
- 
-
-
+     @urls.uniq!
     end
-
-
-   #@a.select!{ |s| s.match( /[\.jpg|\.png]/ )}
+  
 
   end
 

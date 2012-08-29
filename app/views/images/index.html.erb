@@ -1,11 +1,21 @@
-<h1>Hello</h1>
-<% @a.each do |var| %>
+<h2> Number of images </h3>
+<p><%= @urls.size %> </p>
+
+<h2> Sites browsing currently </h3>
+<% @sites.each do |var| %>
     <%=h var %><br>
 <% end %>
 
-<p> <%= @b %> </p>
-<p><%= @t %></p>
-<p><%= @c %></p>
+<% @urls.each do |url| %>
+ 	<%= link_to( image_tag(url), url.to_s) %>
 
-<p><%= @g %></p>
+<!-- 	<h3> <%= url.to_s %></h3> --!>
+
+<% end %>
+
+
+<% @urls.each do |var| %>
+    <%=h var %><br>
+<% end %>
+
 
