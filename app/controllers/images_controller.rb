@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
     require 'rubygems'
-    require 'nokogiri'
+    #require 'nokogiri'
     require 'open-uri'
     require 'httpclient'
 
