@@ -1,4 +1,38 @@
 class PicturesController < ApplicationController
+  
+    def scrape
+    @pictures = Picture.all
+
+    @sites1 = ["http://feeds2.feedburner.com/slashfilm", "http://feeds.feedburner.com/totalfilm/news", "http://feeds.ign.com/ign/movies-all","http://moviesblog.mtv.com/feed", "http://www.mtv.com/rss/news/movies_full.jhtml", "http://www.iwatchstuff.com/index.xml", "http://feeds.movieweb.com/movieweb_movienews", "http://imgur.com/r/movies", "http://feeds.feedburner.com/Cinecast", "http://feeds.feedburner.com/thr/film", "http://rss.firstshowing.net/firstshowing"]
+
+    @sites = ["http://feeds2.feedburner.com/slashfilm"]
+
+    @urls = Array.new
+    @descriptions = Array.new
+    
+    @sites.each do |site|
+
+    response = HTTPClient.get site
+    # @urls += response.body.scan( /http[^<>]*jpg/)
+    # @urls.reject!{|s|s.match(/yahoo/)}
+    # @urls.uniq!
+
+    # img_url = response.body.scan( /http[^<>]*jpg/)
+
+    new_picture = Picture.create(
+    :title => "nil",
+    :keyword => "nil",
+    :description =>"nil",
+    :source => "nil",
+    :image_url => "nil",
+    :article_url => "nil")
+
+   end
+  
+
+  end
+
+
   # GET /pictures
   # GET /pictures.json
   def index
