@@ -13,9 +13,9 @@ class PicturesController < ApplicationController
     @sites.each do |site|
 
     response = HTTPClient.get site
-    # @urls += response.body.scan( /http[^<>]*jpg/)
-    # @urls.reject!{|s|s.match(/yahoo/)}
-    # @urls.uniq!
+    @urls += response.body.scan( /http[^<>]*jpg/)
+    @urls.reject!{|s|s.match(/yahoo/)}
+    @urls.uniq!
 
     # img_url = response.body.scan( /http[^<>]*jpg/)
 
