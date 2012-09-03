@@ -1,13 +1,32 @@
+<h2> Number of items - </h3>
+<p><%= @tmp.size %> </p>
+
+
+<% @tmp.each do |item| %>
+	<% item.pictures.each do |url| %>
+
+	<%= link_to( image_tag(url.url), url.url.to_s) %>
+	<% end %>
+
+<% end %>
+
+<!--
+
 <h1> number of items </h1>
 <%= @tmp.size %>
 
+<%- @tmp.each do |item| %>
+<p><%= item.article_url %></p>
+<% end %>
+
+<!--
 <ul>
 <%- @tmp.each do |item| %>
   <li>
-    <p><%= item.title %></p>
+    <p><%= item.article_url %></p>
     <ul>
       <%- item.pictures.each do |image| %>
-        <img src="<%= image.url %>" />
+        <img src="<%#= image.url %>" />
       <% end %>
     </ul>
   </li>

@@ -4,6 +4,7 @@ Images888::Application.routes.draw do
   get "images/index"
 
   get "welcome/index"
+  get "welcome/scrape"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
