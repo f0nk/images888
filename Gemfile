@@ -7,7 +7,7 @@ gem 'rails', '3.2.1'
 
 # gem 'sqlite3'
 gem 'httpclient'
-#gem 'nokogiri'
+gem 'nokogiri'
 
 group :development, :test do
   gem 'sqlite3'

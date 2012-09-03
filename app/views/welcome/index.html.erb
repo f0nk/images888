@@ -1,2 +1,15 @@
-<h1>Hello</h1>
-<p><%= @scrapeVar %></p>
+<h1> number of items </h1>
+<%= @tmp.size %>
+
+<ul>
+<%- @tmp.each do |item| %>
+  <li>
+    <p><%= item.title %></p>
+    <ul>
+      <%- item.pictures.each do |image| %>
+        <img src="<%= image.url %>" />
+      <% end %>
+    </ul>
+  </li>
+<% end %>
+</ul>
