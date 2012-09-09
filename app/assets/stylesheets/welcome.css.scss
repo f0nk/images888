@@ -2,15 +2,14 @@ body {
   background-color: black;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+
 }
+
 
 div.item {  
   float:left;
   margin:5px;
   position:relative; /* important(so we can absolutely position the description div */
-
 }
 
 img {
@@ -26,10 +25,26 @@ div.title {
   /* styling bellow */
   background-color:black;
  
-  font-size:15px;
+  font-size:12px;
+  font-style:italic;
   color:white;
 }
 
-div.title_content{
-  padding:10px;
+div.title_content {
+ position:relative;
+ left:25px;
+}
+
+
+div.title {
+  padding: 15px;
+
+}
+
+a {
+  color: red;
+  &:visited {
+    color: #666;
+  }
+
 }

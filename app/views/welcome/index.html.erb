@@ -9,9 +9,9 @@
 <%- @tmp.each do |item| %>
   <%- item.pictures.each do |image| %>
   <div class = 'item'>
-          <img src="<%= image.url %>" />
+          <%= link_to image_tag(image.url.to_s, :title => item.created_at.to_s+ ' ' + item.title.strip + '..."'), image.url %>
           <div class ='title'>
-            <div class = 'title_content'> <%= item.title %> </div>
+           <!-- <div class = 'article_url'> <%=  link_to 'via', item.article_url %>  </div> -->
           </div>
   </div>
   <% end %>
@@ -26,7 +26,7 @@ $('.page').isotope({
   layoutMode : 'fitRows'
 });
  </script> 
--->
+
 
 
 <script type="text/javascript">     
@@ -48,13 +48,14 @@ $(window).load(function(){
     //when mouse hover over the wrapper div
     //get it's children elements with class description '
     //and show it using fadeTo
-    $(this).children('.title').stop().fadeTo(500, 0.7);
+    $(this).children('.title').stop().fadeTo(100, 0.8);
   },function(){
     //when mouse out of the wrapper div
     //use fadeTo to hide the div
-    $(this).children('.title').stop().fadeTo(500, 0);
+    $(this).children('.title').stop().fadeTo(100, 0);
   });
 
 });
 
  </script> 
+-->
