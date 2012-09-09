@@ -16,7 +16,7 @@ class WelcomeController < ApplicationController
 
     @sites3 = ["http://feeds.feedburner.com/thr/film"]
 
-    @sites3.each do |site|
+    @sites2.each do |site|
       xml_doc  = Nokogiri::XML(open(site))
       
         @items = xml_doc.xpath("//item")
