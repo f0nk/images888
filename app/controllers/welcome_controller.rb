@@ -4,7 +4,8 @@ class WelcomeController < ApplicationController
 
   def index
  
-    @tmp = Item.all
+    @tmp = Item.order("created_at DESC")
+    @tmp2 = Picture.all
 
   end
 
@@ -13,7 +14,9 @@ class WelcomeController < ApplicationController
 
     @sites2 = ["http://feeds2.feedburner.com/slashfilm", "http://feeds.feedburner.com/totalfilm/news","http://moviesblog.mtv.com/feed", "http://www.mtv.com/rss/news/movies_full.jhtml", "http://www.iwatchstuff.com/index.xml", "http://feeds.movieweb.com/movieweb_movienews", "http://imgur.com/r/movies", "http://feeds.feedburner.com/thr/film", "http://rss.firstshowing.net/firstshowing"]
 
-    @sites2.each do |site|
+    @sites3 = ["http://feeds2.feedburner.com/slashfilm"]
+
+    @sites3.each do |site|
       xml_doc  = Nokogiri::XML(open(site))
       
         @items = xml_doc.xpath("//item")

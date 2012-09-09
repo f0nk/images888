@@ -9,6 +9,8 @@ gem 'rails', '3.2.1'
 gem 'httpclient'
 gem 'nokogiri'
 
+gem "jquery-rails"
+
 group :development, :test do
   gem 'sqlite3'
 end
