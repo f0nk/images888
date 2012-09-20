@@ -9,7 +9,12 @@ gem 'rails', '3.2.1'
 gem 'httpclient'
 gem 'nokogiri'
 
+gem 'acts-as-taggable-on'
+gem 'will_paginate', '> 3.0'
+
 gem "jquery-rails"
+
+gem 'ransack'
 
 group :development, :test do
   gem 'sqlite3'
