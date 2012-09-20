@@ -34,10 +34,14 @@ class WelcomeController < ApplicationController
 
     @buzzsites = ["http://moviesblog.mtv.com/feed", "http://www.mtv.com/rss/news/movies_full.jhtml",]
 
+    @random = ["http://imgur.com/r/movies/rss"]
+
    # scraping(@newssites, "News")
     #scraping(@geeksites, "Geek")
     #scraping(@funsites, "Fun")
-    scraping(@buzzsites, "Buzz")
+    #scraping(@buzzsites, "Buzz")
+
+    scraping(@random, "Random")
 
   end
 
@@ -58,6 +62,7 @@ class WelcomeController < ApplicationController
       @items.each do |item|
 
         img_link =  item.to_html.scan(/http[^<>]*jpg/).reject{|s|s.match(/yahoo/)}.uniq
+        img_link.reject{|t|t.match(/&/)}
 
         break if Picture.where(:url => img_link).exists? == true 
           i = Item.new
