@@ -5,20 +5,32 @@ class TagSystemController < ApplicationController
   def index
 
 
-@sites4 = ["http://feeds2.feedburner.com/slashfilm", "http://feeds.feedburner.com/totalfilm/news","http://moviesblog.mtv.com/feed", "http://www.mtv.com/rss/news/movies_full.jhtml", "http://www.iwatchstuff.com/index.xml", "http://feeds.movieweb.com/movieweb_movienews", "http://imgur.com/r/movies", "http://feeds.feedburner.com/thr/film", "http://rss.firstshowing.net/firstshowing", "http://www.guardian.co.uk/film/filmblog/rss", "http://www.guardian.co.uk/film/rss","http://www.telegraph.co.uk/culture/film/rss", "http://www.fandango.com/rss/moviefeed", "http://latino-review.com/feed/", "http://imgur.com/r/movies/rss","http://www.joblo.com/newsfeeds/rss.xml", "http://geektyrant.com/news/rss.xml", "http://blastr.com/atom.xml", "http://www.iamrogue.com/news?format=feed", "http://www.denofgeek.com/feeds/all", "http://www.cinemablend.com/rss-all.xml"]
+    @sites4 = ["http://feeds2.feedburner.com/slashfilm", "http://feeds.feedburner.com/totalfilm/news","http://moviesblog.mtv.com/feed", "http://www.mtv.com/rss/news/movies_full.jhtml", "http://www.iwatchstuff.com/index.xml", "http://feeds.movieweb.com/movieweb_movienews", "http://imgur.com/r/movies", "http://feeds.feedburner.com/thr/film", "http://rss.firstshowing.net/firstshowing", "http://www.guardian.co.uk/film/filmblog/rss", "http://www.guardian.co.uk/film/rss","http://www.telegraph.co.uk/culture/film/rss", "http://www.fandango.com/rss/moviefeed", "http://latino-review.com/feed/", "http://imgur.com/r/movies/rss","http://www.joblo.com/newsfeeds/rss.xml", "http://geektyrant.com/news/rss.xml", "http://blastr.com/atom.xml", "http://www.iamrogue.com/news?format=feed", "http://www.denofgeek.com/feeds/all", "http://www.cinemablend.com/rss-all.xml"]
 
-@title = []
+    @title = ["http://feeds2.feedburner.com/slashfilm"]
 
-    @sites4.each do |site|
-      xml_doc  = Nokogiri::XML(open(site))
+    @img_link = []
+    xml_doc  = Nokogiri::XML(open("http://feeds.movieweb.com/movieweb_movienews?format=xml"))
+
+    @testing1 = []
+
+    @items = xml_doc.xpath("//item")
+
+      @items.each do |item|
+
+      # @testing = item.to_html.scan(/http[^<>]*jpg/).last.gsub('"',' ').gsub(' ',',').split(",").select{|s|s.match(/http[^<>]*jpg/)}.uniq
+      # @testing1 = item.to_html.scan(/http[^<>]*jpg/).first
+      # @testing1 = item.to_html.scan(/http[^"]*jpg/)
+       #.gsub('"',' ').match(/http[^<>]*?jpg/)[0]
+
+       @testing1 = "This is A Test".gsub(' ',', ')
+
+      @img_link.push(item.to_html.scan(/http[^"]*jpg/).reject{|s|s.match(/http:\/\/media.movieweb.com\/i\/img\/feed\/fb.jpg/)}.reject{|t|t.include?('-70x53')}.reject{|k|k.include?('-550x')}.reject{|s|s.include?('--003')}.reject{|j|j.include?('-005')}.uniq)
       
-        if xml_doc.xpath("//title").first == nil
-        	@title.push(site)
-        else
-        	@title.push(xml_doc.xpath("//title").first.inner_text.to_s)
+       # @img_link.push(item.to_html.scan(/http[^<>]*jpg/).gsub('"','').match(/http[^<>]*jpg/)[0].gsub('mce_src=',','))
 
-    	end
+       # img_link.reject{|t|t.match(/&/)}
 
+      end
   end
-end
 end

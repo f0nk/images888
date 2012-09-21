@@ -16,7 +16,6 @@ class WelcomeController < ApplicationController
 
     @sites3 = ["http://feeds2.feedburner.com/slashfilm", "http://feeds.feedburner.com/totalfilm/news","http://moviesblog.mtv.com/feed", "http://www.mtv.com/rss/news/movies_full.jhtml", "http://www.iwatchstuff.com/index.xml", "http://feeds.movieweb.com/movieweb_movienews", "http://imgur.com/r/movies", "http://feeds.feedburner.com/thr/film", "http://rss.firstshowing.net/firstshowing", "http://www.guardian.co.uk/film/filmblog/rss", "http://www.guardian.co.uk/film/rss","http://www.telegraph.co.uk/culture/film/rss", "http://www.fandango.com/rss/moviefeed", "http://latino-review.com/feed/", "http://imgur.com/r/movies/rss","http://www.joblo.com/newsfeeds/rss.xml", "http://geektyrant.com/news/rss.xml", "http://blastr.com/atom.xml", "http://www.iamrogue.com/news?format=feed", "http://www.denofgeek.com/feeds/all", "http://www.cinemablend.com/rss-all.xml"]
 
-    #, "http://www.movieweb.com/rss"
     #"http://www.iamrogue.com/news?format=feed"
     #, "http://blastr.com/atom.xml"
     # "http://feeds.feedburner.com/totalfilm/news"
@@ -25,20 +24,20 @@ class WelcomeController < ApplicationController
         #@categories = ["All, Geek, News, Buzz, Fun, Top Hits"]
 
 
-    @newssites = ["http://feeds2.feedburner.com/slashfilm", "http://www.iwatchstuff.com/index.xml", "http://feeds.movieweb.com/movieweb_movienews", "http://feeds.feedburner.com/thr/film", "http://rss.firstshowing.net/firstshowing", "http://www.guardian.co.uk/film/filmblog/rss", "http://www.guardian.co.uk/film/rss","http://www.telegraph.co.uk/culture/film/rss", "http://www.fandango.com/rss/moviefeed", "http://latino-review.com/feed/", "http://www.joblo.com/newsfeeds/rss.xml", "http://www.cinemablend.com/rss-all.xml"]
+    @newssites = ["http://feeds2.feedburner.com/slashfilm", "http://www.iwatchstuff.com/index.xml", "http://feeds.movieweb.com/movieweb_movienews?format=xml", "http://feeds.feedburner.com/thr/film", "http://rss.firstshowing.net/firstshowing", "http://www.guardian.co.uk/film/filmblog/rss", "http://www.guardian.co.uk/film/rss","http://www.telegraph.co.uk/culture/film/rss", "http://www.fandango.com/rss/moviefeed", "http://latino-review.com/feed/", "http://www.joblo.com/newsfeeds/rss.xml", "http://www.cinemablend.com/rss-all.xml", "http://feeds.feedburner.com/totalfilm/news","http://www.iamrogue.com/news?format=feed"]
 
 
     @geeksites =["http://www.denofgeek.com/feeds/all", "http://geektyrant.com/news/rss.xml"]
 
-    @funsites = []
+    @funsites = ["http://imgur.com/r/movies/rss"]
 
     @buzzsites = ["http://moviesblog.mtv.com/feed", "http://www.mtv.com/rss/news/movies_full.jhtml",]
 
-    @random = ["http://imgur.com/r/movies/rss"]
+    @random = ["http://feeds.movieweb.com/movieweb_news?format=xml"]
 
     scraping(@newssites, "News")
     scraping(@geeksites, "Geek")
-    #scraping(@funsites, "Fun")
+    scraping(@funsites, "Fun")
     scraping(@buzzsites, "Buzz")
 
     #scraping(@random, "Random")
@@ -61,16 +60,20 @@ class WelcomeController < ApplicationController
 
       @items.each do |item|
 
-        img_link =  item.to_html.scan(/http[^<>]*jpg/).reject{|s|s.match(/yahoo/)}.uniq
-       # img_link.reject{|t|t.match(/&/)}
+        img_link =  item.to_html.scan(/http[^"]*jpg/).reject{|s|s.match(/http:\/\/media.movieweb.com\/i\/img\/feed\/fb.jpg/)}.reject{|t|t.include?('-70x53')}.reject{|k|k.include?('-550x')}.reject{|s|s.include?('--003')}.reject{|j|j.include?('-005')}.reject{|j|j.include?('tops')}.uniq
 
-        break if Picture.where(:url => img_link).exists? == true 
+        title = item.xpath("title").inner_text.to_s.strip
+
+        break if Picture.where(:url => img_link).exists? == true || Item.where(:title => title).exists? == true
+
           i = Item.new
-          i.title = item.xpath("title").inner_text.to_s.strip
+          i.title = title
           i.keywords = item.xpath("category").inner_text.to_s.gsub( / /, "," )
           i.article_url = item.xpath("link").inner_text.to_s.strip
           i.source_list = @source.strip
           i.category_list = categ + ", All"
+          i.tag_list = title.gsub(' ',', ')
+
           i.save
 
           img_link.each do |p|
