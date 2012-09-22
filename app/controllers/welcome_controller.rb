@@ -24,7 +24,7 @@ class WelcomeController < ApplicationController
         #@categories = ["All, Geek, News, Buzz, Fun, Top Hits"]
 
 
-    @newssites = ["http://feeds2.feedburner.com/slashfilm", "http://www.iwatchstuff.com/index.xml", "http://feeds.movieweb.com/movieweb_movienews?format=xml", "http://feeds.feedburner.com/thr/film", "http://rss.firstshowing.net/firstshowing", "http://www.guardian.co.uk/film/filmblog/rss", "http://www.guardian.co.uk/film/rss","http://www.telegraph.co.uk/culture/film/rss", "http://www.fandango.com/rss/moviefeed", "http://latino-review.com/feed/", "http://www.joblo.com/newsfeeds/rss.xml", "http://www.cinemablend.com/rss-all.xml", "http://feeds.feedburner.com/totalfilm/news","http://www.iamrogue.com/news?format=feed"]
+    @newssites = ["http://feeds2.feedburner.com/slashfilm", "http://www.iwatchstuff.com/index.xml", "http://feeds.movieweb.com/movieweb_movienews?format=xml", "http://feeds.feedburner.com/thr/film", "http://rss.firstshowing.net/firstshowing", "http://www.guardian.co.uk/film/filmblog/rss", "http://www.guardian.co.uk/film/rss","http://www.telegraph.co.uk/culture/film/rss", "http://www.fandango.com/rss/moviefeed", "http://latino-review.com/feed/", "http://www.joblo.com/newsfeeds/rss.xml", "http://www.cinemablend.com/rss-all.xml", "http://feeds.feedburner.com/totalfilm/news","http://www.iamrogue.com/news?format=feed", "http://feeds.feedburner.com/FilmSchoolRejects?format=xml", "http://feeds.feedburner.com/Pajiba"]
 
 
     @geeksites =["http://www.denofgeek.com/feeds/all", "http://geektyrant.com/news/rss.xml"]
@@ -33,14 +33,14 @@ class WelcomeController < ApplicationController
 
     @buzzsites = ["http://moviesblog.mtv.com/feed", "http://www.mtv.com/rss/news/movies_full.jhtml",]
 
-    @random = ["http://feeds.movieweb.com/movieweb_news?format=xml"]
+    @random = ["http://feeds2.feedburner.com/slashfilm","http://www.denofgeek.com/feeds/all", "http://feeds.feedburner.com/FilmSchoolRejects?format=xml"]
 
-    scraping(@newssites, "News")
-    scraping(@geeksites, "Geek")
-    scraping(@funsites, "Fun")
-    scraping(@buzzsites, "Buzz")
+   # scraping(@newssites, "News")
+   # scraping(@geeksites, "Geek")
+   # scraping(@funsites, "Fun")
+   # scraping(@buzzsites, "Buzz")
 
-    #scraping(@random, "Random")
+    scraping(@random, "Random")
 
   end
 
@@ -72,8 +72,7 @@ class WelcomeController < ApplicationController
           i.article_url = item.xpath("link").inner_text.to_s.strip
           i.source_list = @source.strip
           i.category_list = categ + ", All"
-          i.tag_list = title.gsub(' ',', ')
-
+          i.tag_list = title.gsub(' ',', ').gsub('-',' ').gsub(/([\:\/()'?".-!])/, '')+ ',' item.xpath("category").inner_text.to_s.split(/(?=[A-Z])/).join(' ').gsub(' ',',').gsub(',,',',').gsub(/([\:\/()'?".-!])/, '')
           i.save
 
           img_link.each do |p|

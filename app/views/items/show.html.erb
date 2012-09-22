@@ -45,5 +45,10 @@
         <%= link_to source.name, tagged_url(:source => source.name) %>
 <% end %>
 
+<% @item.tags.any? %>
+        <% @item.tags.each do |tag| %>
+        <%= link_to tag.name, tagged_url(:tag => tag.name) %>
+<% end %>
+
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>

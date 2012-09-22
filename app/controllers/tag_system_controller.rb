@@ -10,9 +10,9 @@ class TagSystemController < ApplicationController
     @title = ["http://feeds2.feedburner.com/slashfilm"]
 
     @img_link = []
-    xml_doc  = Nokogiri::XML(open("http://feeds.movieweb.com/movieweb_movienews?format=xml"))
+    xml_doc  = Nokogiri::XML(open("http://feeds2.feedburner.com/slashfilm"))
 
-    @testing1 = []
+    @testing1 = "Warner Bros. Will Open Baz Luhrmanns The Great Gatsby in May, Which Is Now Early Summer"
 
     @items = xml_doc.xpath("//item")
 
@@ -23,10 +23,14 @@ class TagSystemController < ApplicationController
       # @testing1 = item.to_html.scan(/http[^"]*jpg/)
        #.gsub('"',' ').match(/http[^<>]*?jpg/)[0]
 
-       @testing1 = "This is A Test".gsub(' ',', ')
+       @testing1.gsub(/([\:\/()'?".!])/, '')
 
-      @img_link.push(item.to_html.scan(/http[^"]*jpg/).reject{|s|s.match(/http:\/\/media.movieweb.com\/i\/img\/feed\/fb.jpg/)}.reject{|t|t.include?('-70x53')}.reject{|k|k.include?('-550x')}.reject{|s|s.include?('--003')}.reject{|j|j.include?('-005')}.uniq)
+    #  @img_link.push(item.to_html.scan(/http[^"]*jpg/).reject{|s|s.match(/http:\/\/media.movieweb.com\/i\/img\/feed\/fb.jpg/)}.reject{|t|t.include?('-70x53')}.reject{|k|k.include?('-550x')}.reject{|s|s.include?('--003')}.reject{|j|j.include?('-005')}.uniq)
       
+   #  @test2 =  item.xpath("title").inner_text.to_s.split(/(?=[A-Z])/).join(' ').gsub(' ',',').gsub(',,',',').gsub(/([\:\/()'"!-])/, '')
+
+     @title = item.xpath("title").inner_text.to_s.strip
+
        # @img_link.push(item.to_html.scan(/http[^<>]*jpg/).gsub('"','').match(/http[^<>]*jpg/)[0].gsub('mce_src=',','))
 
        # img_link.reject{|t|t.match(/&/)}
