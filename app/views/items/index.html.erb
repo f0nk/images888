@@ -7,6 +7,16 @@
 
 </div>
 
+<form name="input" action="/tagged" method="get">
+	<div class = "field" >
+	<%= collection_select(:tag,'', @tags, :name, :name) %>
+	</div>
+	<div class = "actions">
+	<input type="submit" value="Submit"></form> 
+	 </div>
+
+
+
 
 <p>Currently <%= @items.size %> news items with <%= Picture.count %> images</p> 
 

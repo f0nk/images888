@@ -10,11 +10,15 @@
 
 <%= @tags.size %>
 
+
 <%= form_for :tag, :url=>{:action =>"process"} do |f| %>
+	<div class = "field" >
+	  <%= collection_select(:tag, :item_id, @tags, :id, :name, {}, {multiple:true}) %>
+	</div>
+	 <div class = "actions">
+	 <%=f.submit "continue" %>
+	 </div>
 
-  <%= collection_select(:tag, :item_id, @tags, :id, :name) %>
-
- <%=f.submit "continue" %>
 <%end%>
 
 

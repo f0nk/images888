@@ -8,6 +8,9 @@ class ItemsController < ApplicationController
     #@items = Item.order("created_at DESC").page(params[:page]).per_page(40)
     @tmp2 = Item.all
 
+   @tags = Item.tag_counts_on(:tags)
+
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @items }
@@ -15,9 +18,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  def tag_cloud
-    @tags = Item.tag_counts_on(:source)
-  end
 
   def tagged
       if params[:tag].present? 
