@@ -8,7 +8,19 @@
 
 <p><%= @title %></p>
 
+<%= @tags.size %>
 
+<%= form_for :tag, :url=>{:action =>"process"} do |f| %>
+
+  <%= collection_select(:tag, :item_id, @tags, :id, :name) %>
+
+ <%=f.submit "continue" %>
+<%end%>
+
+
+<% @tags.each do |tag| %>
+  <%=  %>
+<% end %>
 
 <%- @img_link.each do |item| %>
 	

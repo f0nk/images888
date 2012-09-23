@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   
   def index
     @search = Item.search(params[:q])
-    @items = @search.result.order("created_at DESC").page(params[:page]).per_page(40)
+    @items = @search.result.order("created_at DESC").page(params[:page]).per_page(20)
     #@items = Item.order("created_at DESC").page(params[:page]).per_page(40)
     @tmp2 = Item.all
 
@@ -15,13 +15,16 @@ class ItemsController < ApplicationController
     end
   end
 
+  def tag_cloud
+    @tags = Item.tag_counts_on(:source)
+  end
+
   def tagged
       if params[:tag].present? 
       @items = Item.tagged_with(params[:tag]).page(params[:page]).per_page(10)
     else 
       #@items = Item.postall.page(params[:page]).per_page(40)
       @items = Item.first
-
     end  
   end
 

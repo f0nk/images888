@@ -13,6 +13,7 @@ Images888::Application.routes.draw do
   match 'tag_system' => 'tag_system#index', :as => 'tag_system'
   match 'tagged' => 'items#tagged', :as => 'tagged'
 
+  get "tag_system/process"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

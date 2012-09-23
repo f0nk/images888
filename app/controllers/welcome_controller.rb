@@ -33,14 +33,14 @@ class WelcomeController < ApplicationController
 
     @buzzsites = ["http://moviesblog.mtv.com/feed", "http://www.mtv.com/rss/news/movies_full.jhtml",]
 
-    @random = ["http://feeds2.feedburner.com/slashfilm","http://www.denofgeek.com/feeds/all", "http://feeds.feedburner.com/FilmSchoolRejects?format=xml"]
+    @random = ["http://feeds2.feedburner.com/slashfilm"]
 
     scraping(@newssites, "News")
     scraping(@geeksites, "Geek")
     scraping(@funsites, "Fun")
-    scraping(@buzzsites, "Buzz")
+   scraping(@buzzsites, "Buzz")
 
-    #scraping(@random, "Random")
+   # scraping(@random, "Random")
 
   end
 

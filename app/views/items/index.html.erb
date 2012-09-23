@@ -1,3 +1,4 @@
+
 <div class ="navbar">
 	<a href="#" class="button">category</a>
 	<a href="#" class="button">date</a>
@@ -6,7 +7,11 @@
 
 </div>
 
+
 <p>Currently <%= @items.size %> news items with <%= Picture.count %> images</p> 
+
+
+<%= will_paginate @items %>
 
 <%= search_form_for @search do |f| %>
 	<div class ="field">
@@ -16,11 +21,9 @@
 	<div class="actions"><%= f.submit %></div>
 <% end %> 
   
-
 <div class = 'items' id ='items'>
 <%= render @items %>
 </div>
 
-<div class = 'pagitems'>
-<%= will_paginate @items %>
-</div>
+
+

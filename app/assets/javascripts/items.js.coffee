@@ -7,6 +7,6 @@ jQuery ->
     $(window).scroll ->
       url = $('.pagination .next_page').attr('href')
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
-        $('.pagination').html('<div id="spinner"><img src="http://25.media.tumblr.com/tumblr_magxzaxEkV1qedb29o1_500.gif"/></div>')
+        $('.pagination').html('<div id="spinner"><img src="http://i.imgur.com/wJp2J.gif"/></div>')
         $.getScript(url)
     $(window).scroll()

@@ -6,25 +6,37 @@ body {
 
 }
 
+.css1 { font-size: 1.0em; }
+.css2 { font-size: 1.2em; }
+.css3 { font-size: 1.4em; }
+.css4 { font-size: 1.6em; }
 
-div.pagitems{
-   position:relative;
-   float:bottom;
+div.spinner {
+ display:block; 
+}
+
+div.pagination{
+  position:fixed;
+  top:95%;
+  right:50%;
+  z-index:1;
+
 }
 
 div.item {  
   float:left;
   margin:5px;
   position:relative; /* important(so we can absolutely position the description div */
+  width: 250px; height: 150px; overflow: hidden; 
 }
 
-div.spinner {
-
+div.items {
+    width: 80%;
+    margin: 0px auto;
 }
 
 img {
-    max-width: 250px;
-    height: auto;
+width: 100%;
 }
 
 
@@ -40,6 +52,7 @@ text-align:center;
 padding:10px;
 text-decoration:none;
 }
+
 a:hover,a:active
 {
 background-color:blue ;
