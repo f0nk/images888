@@ -5,9 +5,11 @@
 
 <% images.each do |image|  %>
 
+<div class = 'item'>
   <%= link_to image_tag(image.url.to_s, :title => @item.created_at.to_s+ ' ' + @item.title.strip + '..."'), image.url.to_s %>
-
+</div>
 <% end %>
+
 
 
 <p>
@@ -49,6 +51,6 @@
         <% @item.tags.each do |tag| %>
         <%= link_to tag.name, tagged_url(:tag => tag.name) %>
 <% end %>
-
+<p></p>
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>
