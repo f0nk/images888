@@ -1,4 +1,6 @@
 Images888::Application.routes.draw do
+
+
   get "tag_system/process"
 
   get "tag_system/index"
@@ -10,6 +12,10 @@ Images888::Application.routes.draw do
   get "welcome/index"
   get "welcome/scrape"
   
+  match '/about', to: 'items#about'
+  match '/tagcloud', to: 'items#tagcloud'
+  match '/terms', to: 'terms#terms'
+
   match 'tag_system' => 'tag_system#index', :as => 'tag_system'
   match 'tagged' => 'items#tagged', :as => 'tagged'
 

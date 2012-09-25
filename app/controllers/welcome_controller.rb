@@ -60,7 +60,7 @@ class WelcomeController < ApplicationController
 
       @items.each do |item|
 
-        img_link =  item.to_html.scan(/http[^"]*jpg/).reject{|s|s.match(/http:\/\/media.movieweb.com\/i\/img\/feed\/fb.jpg/)}.reject{|t|t.include?('-70x53')}.reject{|k|k.include?('-550x')}.reject{|s|s.include?('--003')}.reject{|j|j.include?('-005')}.reject{|j|j.include?('tops')}.uniq
+        img_link =  item.to_html.scan(/http[^"]*jpg/).reject{|s|s.match(/http:\/\/media.movieweb.com\/i\/img\/feed\/fb.jpg/)}.reject{|t|t.include?('-70x53')}.reject{|k|k.include?('-550x')}.reject{|s|s.include?('--003')}.reject{|j|j.include?('-005')}.reject{|j|j.include?('tops')}.reject{|j|j.include?('-003.')}.uniq
 
         title = item.xpath("title").inner_text.to_s.strip
 

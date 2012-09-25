@@ -1,36 +1,7 @@
-
-<div class ="navbar">
-	<a href="#" class="button">category</a>
-	<a href="#" class="button">date</a>
-	<a href="#" class="button">search</a>
-	<a href="#" class="button">load</a>
-
-</div>
-
-<form name="input" action="/tagged" method="get">
-	<div class = "field" >
-	<%= collection_select(:tag,'', @tags, :name, :name) %>
-	</div>
-	<div class = "actions">
-	<input type="submit" value="Submit"></form> 
-	 </div>
-
-
-
-
 <p>Currently <%= @items.size %> news items with <%= Picture.count %> images</p> 
-
 
 <%= will_paginate @items %>
 
-<%= search_form_for @search do |f| %>
-	<div class ="field">
-		<%= f.label :source_cont, "Search for a title" %>
-		<%= f.text_field :source_cont %>
-	</div>
-	<div class="actions"><%= f.submit %></div>
-<% end %> 
-  
 <div class = 'items' id ='items'>
 <%= render @items %>
 </div>

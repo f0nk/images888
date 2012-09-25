@@ -1,0 +1,86 @@
+@import "bootstrap";
+
+body {
+  background-color: white;
+  color: white  ;
+  font-family: verdana, arial, helvetica, sans-serif;
+  text-align:center;
+
+}
+
+div.spinner {
+ display:block; 
+}
+
+div.pagination{
+  position:fixed;
+  top:95%;
+  right:50%;
+  z-index:1;
+
+}
+
+div.item {  
+  float:left;
+  margin:5px;
+  position:relative; /* important(so we can absolutely position the description div */
+  width: 250px; height: 150px; overflow: hidden; 
+}
+
+div.items {
+    width: 80%;
+    margin: 0px auto;
+}
+
+img {
+width: 100%;
+}
+
+a:hover,a:active
+{
+background-color:blue ;
+}
+
+
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}

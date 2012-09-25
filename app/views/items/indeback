@@ -1,3 +1,11 @@
+<%= search_form_for @search do |f| %>
+  <div class ="field">
+    <%= f.label :source_cont, "Search for a title" %>
+    <%= f.text_field :source_cont %>
+  </div>
+  <div class="actions"><%= f.submit %></div>
+<% end %> 
+
 
 <h1>Listing items</h1>
 

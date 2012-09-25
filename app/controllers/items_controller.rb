@@ -2,13 +2,13 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   
-  def index
+   def index
     @search = Item.search(params[:q])
-    @items = @search.result.order("created_at DESC").page(params[:page]).per_page(20)
+    @items = @search.result.order("created_at DESC").page(params[:page]).per_page(40)
     #@items = Item.order("created_at DESC").page(params[:page]).per_page(40)
     @tmp2 = Item.all
 
-   @tags = Item.tag_counts_on(:tags)
+  # @taglist = Item.tag_counts_on(:tags)
 
 
     respond_to do |format|
@@ -98,4 +98,14 @@ class ItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def tagcloud
+  end
+
+  def terms
+  end
+
+  def about
+  end
+
 end
