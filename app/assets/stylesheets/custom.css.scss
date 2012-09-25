@@ -15,15 +15,11 @@ $navbarHeight: 60px;
 }
 
 body {
-  background-color: white;
-  color: white  ;
-  font-family: verdana, arial, helvetica, sans-serif;
-  text-align:center
-
+	position:center;
 }
 
 div.spinner {
- display:block; 
+ display:none; 
 }
 
 div.pagination{
@@ -31,6 +27,7 @@ div.pagination{
   top:95%;
   right:50%;
   z-index:1;
+  display:none; 
 
 }
 
