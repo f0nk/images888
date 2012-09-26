@@ -33,14 +33,14 @@ class WelcomeController < ApplicationController
 
     @buzzsites = ["http://moviesblog.mtv.com/feed", "http://www.mtv.com/rss/news/movies_full.jhtml",]
 
-    @random = ["http://feeds2.feedburner.com/slashfilm"]
+    @random = ["http://feeds2.feedburner.com/slashfilm", "http://www.denofgeek.com/feeds/all"]
 
    scraping(@newssites, "News")
    scraping(@geeksites, "Geek")
    scraping(@funsites, "Fun")
    scraping(@buzzsites, "Buzz")
 
-   # scraping(@random, "Random")
+   #scraping(@random, "Random")
 
   end
 
@@ -60,7 +60,7 @@ class WelcomeController < ApplicationController
 
       @items.each do |item|
 
-        img_link =  item.to_html.scan(/http[^"]*jpg/).reject{|s|s.match(/http:\/\/media.movieweb.com\/i\/img\/feed\/fb.jpg/)}.reject{|t|t.include?('-70x53')}.reject{|k|k.include?('-550x')}.reject{|s|s.include?('--003')}.reject{|j|j.include?('-005')}.reject{|j|j.include?('tops')}.reject{|j|j.include?('-003.')}.uniq
+        img_link =  item.to_html.scan(/http[^"]*jpg/).reject{|s|s.match(/http:\/\/media.movieweb.com\/i\/img\/feed\/fb.jpg/)}.reject{|t|t.include?('-70x53')}.reject{|k|k.include?('-550x')}.reject{|s|s.include?('--003')}.reject{|j|j.include?('-005')}.reject{|j|j.include?('tops')}.reject{|j|j.include?('-003.')}.reject{|j|j.include?('b.jpg')}.reject{|j|j.include?('h.jpg')}.uniq
 
         title = item.xpath("title").inner_text.to_s.strip
 
@@ -68,7 +68,7 @@ class WelcomeController < ApplicationController
 
           i = Item.new
           i.title = title
-          i.keywords = item.xpath("category").inner_text.to_s.gsub( / /, "," )
+          #i.keywords = item.xpath("category").inner_text.to_s.gsub( / /, "," )
           i.article_url = item.xpath("link").inner_text.to_s.strip
           i.source_list = @source.strip
           i.category_list = categ + ", All"

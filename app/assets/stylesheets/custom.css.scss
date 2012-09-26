@@ -3,7 +3,7 @@ $navbarHeight: 60px;
 
 
 .navbar-inner {
-  background-color: white; /* background color will be black for all browsers */
+  background-color: black; /* background color will be black for all browsers */
   background-image: none;
   background-repeat: no-repeat;
   filter: none;
@@ -14,8 +14,18 @@ $navbarHeight: 60px;
 
 }
 
+#tag_cloud {
+ width: 80%;
+    margin: 0px auto;
+  line-height: 1.6em;
+  .s { font-size: 0.8em; }
+  .m { font-size: 1.2em; }
+  .l { font-size: 1.8em; }
+}
+
 body {
 	position:center;
+  background-color: black;
 }
 
 div.spinner {
@@ -42,14 +52,20 @@ div.item {
 div.items {
     width: 80%;
     margin: 0px auto;
+
 }
 
 img {
 width: 100%;
+  border: 1px solid #0000ff;
+
 
 }
 
-
+img:hover
+{
+border: 2px solid #00000F;
+}
 
 
 /* universal */
@@ -59,7 +75,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 70px;
 }
 
 section {

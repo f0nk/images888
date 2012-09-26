@@ -20,12 +20,15 @@ class ItemsController < ApplicationController
 
 
   def tagged
-      if params[:tag].present? 
+      if params[:tag].present?
+      @tmp = params[:tag]
       @items = Item.tagged_with(params[:tag]).page(params[:page]).per_page(40)
       elsif params[:source].present? 
       @items = Item.tagged_with(params[:source]).page(params[:page]).per_page(40)
+      @tmp = params[:source]
     elsif params[:category].present? 
       @items = Item.tagged_with(params[:category]).page(params[:page]).per_page(10)
+      @tmp = params[:category]
                 
     else 
       #@items = Item.postall.page(params[:page]).per_page(40)
